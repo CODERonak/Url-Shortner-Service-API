@@ -80,14 +80,11 @@ ShortUrl {
 ```java
 ShortenRequestDTO {
   @NotBlank String targetUrl;
-  String customAlias;
-  Instant expiresAt;
 }
 
 ShortenResponseDTO {
   String alias;
   String shortUrl;
-  Instant expiresAt;
 }
 ```
 
@@ -97,15 +94,14 @@ ShortenResponseDTO {
 ShortenResponseDTO createShortUrl(ShortenRequestDTO dto);
 String resolveAlias(String alias);
 void incrementClickCount(String alias);
-void cleanupExpiredUrls();
 ```
 
 ### 🌐 Endpoints
 
-| Method | Endpoint          | Description                       |
-| ------ | ----------------- | --------------------------------- |
-| `POST` | `/api/v1/shorten` | Create short URL                  |
-| `GET`  | `/{alias}`        | Redirect to target URL (HTTP 302) |
+| Method | Endpoint           | Description                       |
+| ------ | -------------------| --------------------------------- |
+| `POST` | `/api/url/shorten` | Create short URL                  |
+| `GET`  | `/api/url/{alias}` | Redirect to target URL (HTTP 302) |
 
 ---
 
