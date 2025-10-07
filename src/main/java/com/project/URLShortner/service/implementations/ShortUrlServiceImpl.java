@@ -23,6 +23,8 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     private final ShortUrlMapper shortUrlMapper;
 
     // Base URL for the shortened URLs
+    // The url doesnt work, but the resolve yourlocalhost/api/url/{alias}
+    // does work if your running on localhost
     private static final String BASE_URL = "https://wel.ly/";
 
     // creates a new shortened url and saves it to the database
@@ -51,6 +53,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         return responseDto;
     }
 
+    // Resolves a shortened URL by its alias and increments the click count
     @Override
     public String resolveAlias(String alias) {
         ShortUrl shortUrl = shortUrlRepository.findByAlias(alias)
@@ -65,6 +68,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         return shortUrl.getTargetUrl();
     }
 
+    // Increments the click count for a shortened URL
     @Override
     public void incrementClickCount(String alias) {
         ShortUrl shortUrl = shortUrlRepository.findByAlias(alias)
