@@ -60,12 +60,18 @@ public class ShortUrlServiceImpl implements ShortUrlService {
             throw new RuntimeException("URL is inactive or expired");
         }
 
+        incrementClickCount(alias);
+
         return shortUrl.getTargetUrl();
     }
 
     @Override
     public void incrementClickCount(String alias) {
-        throw new UnsupportedOperationException("Unimplemented method 'incrementClickCount'");
+        ShortUrl shortUrl = shortUrlRepository.findByAlias(alias)
+                .orElseThrow(() -> new RuntimeException("Alias not found"));
+
+        shortUrl.setClickCount(shortUrl.getClickCount() + 1);
+        shortUrlRepository.save(shortUrl);
     }
 
     // Generates a unique alias for the shortened URL
