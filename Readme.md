@@ -9,9 +9,22 @@
 
 ---
 
+## 🚀 Deployment Info
+
+> ✅ **Live API:**
+> This backend API has been deployed to **Google Cloud Run**.
+> You can access the live API here:
+> 🔗 [URL Shortener Service](https://url-shortening-service-585619166200.us-central1.run.app)
+
+> 📬 **Postman Collection:**
+> To test all endpoints (shorten URL and resolve alias), use the Postman collection below:
+> 🔗 [URL Shortener — Postman Collection](https://www.postman.com/flight-technologist-23919603/monolithic/request/kbymaxp/url-shortener-service?action=share&creator=42910295)
+
+---
+
 ## 🧩 Overview
 
-This project implements a **production-ready URL Shortener backend** that follows **Clean Architecture**, **SOLID principles**, and **CS fundamentals**.
+This project implements a **URL Shortener backend** that follows **Clean Architecture**, **SOLID principles**, and **CS fundamentals**.
 It uses **Spring Boot**, **JPA**, and **MapStruct** for clean and maintainable layering.
 
 ---
@@ -50,11 +63,9 @@ src/
     │   ├── model/entity/    # JPA entities
     │   ├── repository/      # Spring Data Repositories
     │   ├── service/         # Interfaces + Implementations
-    │   ├── util/            # Base62, Validators, Redis utils
-    │   └── exception/       # Global error handling
+    │   ├── util/            # Base62, Validators utils
     └── resources/
         ├── application.yml  # Environment profiles (dev/prod)
-        └── db/migration/    # Flyway migration scripts
 ```
 
 ---
@@ -85,6 +96,8 @@ ShortenRequestDTO {
 ShortenResponseDTO {
   String alias;
   String shortUrl;
+  String targetUrl;
+  Instant createdAt;
 }
 ```
 
@@ -99,7 +112,7 @@ void incrementClickCount(String alias);
 ### 🌐 Endpoints
 
 | Method | Endpoint           | Description                       |
-| ------ | -------------------| --------------------------------- |
+| ------ | ------------------ | --------------------------------- |
 | `POST` | `/api/url/shorten` | Create short URL                  |
 | `GET`  | `/api/url/{alias}` | Redirect to target URL (HTTP 302) |
 
@@ -111,7 +124,6 @@ void incrementClickCount(String alias);
 * **Spring Data JPA** + **Hibernate Validator**
 * **Lombok**
 * **MapStruct** (DTO ↔ Entity mapping)
-* **Redis (Lettuce)** (Caching)
 * **Spring Boot Actuator** (Health checks, metrics)
 
 ---
@@ -122,6 +134,7 @@ void incrementClickCount(String alias);
 | ------------------- | ------------------------------ |
 | `Base62Encoder`     | Encodes DB IDs → short aliases |
 | `UrlValidator`      | Validates URL format           |
-| `RedisCacheManager` | Cache-aside pattern wrapper    |
 
 ---
+
+
