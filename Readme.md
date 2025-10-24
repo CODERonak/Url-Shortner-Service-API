@@ -12,10 +12,7 @@
 ## 🚀 Deployment Info
 
 > ✅ **Live API:**
-> This backend API has been deployed to **Google Cloud Run**.
-> You can access the live API here:
-> Remember to test all endpoints using an API client like Postman as it's a backend API
-> 🔗 [URL Shortener Service](https://url-shortening-service-585619166200.us-central1.run.app)
+> This backend API was deployed to **Google Cloud Run** but is not available right now.
 
 > 📬 **Postman Collection:**
 > To test all endpoints (shorten URL and resolve alias), use the Postman collection below:
